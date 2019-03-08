@@ -167,6 +167,21 @@
             });
 
             /**
+             * MULTIPLE-IMAGES Delete function
+             */
+            /*$(".remove-multi-image").on('click', function(e){
+                e.preventDefault();
+                var result = confirm("Are you sure you want to delete this image?");
+                if (result) {
+                    $.post('{{-- route('voyager.page-blocks.delete-multiple-image') --}}', {
+                        field: $(this).data('id'),
+                        file_name: $(this).data('file-name'),
+                        _token: '{{ csrf_token() }}'
+                    });
+                }
+            });*/
+
+            /**
              * Confirm DELETE block
              */
             $("[data-delete-block-btn]").on('click', function(e){
@@ -215,7 +230,7 @@
                     $('.dd').removeClass('dd-dragging');
 
                     // Post the request
-                    $.post('{{ route('voyager.page-blocks.order') }}', {
+                    $.post('{{ route('voyager.page-blocks.sort') }}', {
                         order: JSON.stringify($('.dd').nestable('serialize')),
                         _token: '{{ csrf_token() }}'
                     }, function (data) {

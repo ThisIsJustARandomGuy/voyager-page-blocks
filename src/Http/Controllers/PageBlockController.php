@@ -59,13 +59,22 @@ class PageBlockController extends VoyagerBaseController
         foreach ($template->fields as $row) {
             $existingData = $block->data;
 
-            if ($row->partial === 'voyager::formfields.image' && is_null($request->input($row->field))) {
-                $data[$row->field] = $existingData->{$row->field};
+            if (
+                $row->partial === 'voyager::formfields.image'
+                || $row->partial === 'voyager::formfields.multiple_images'
+            ) {
+                if (is_null($request->file($row->field))) {
+                    if (isset($existingData->{$row->field})) {
+                        $data[$row->field] = $existingData->{$row->field};
+                    }
 
-                continue;
+                    continue;
+                }
+
+                $data[$row->field] = $request->file($row->field);
+            } else {
+                $data[$row->field] = $request->input($row->field);
             }
-
-            $data[$row->field] = $request->input($row->field);
         }
 
         // Just.Do.It! (Nike, TM)
@@ -103,7 +112,7 @@ class PageBlockController extends VoyagerBaseController
      *
      * @param \Illuminate\Http\Request $request
      */
-    public function order(Request $request)
+    public function sort(Request $request)
     {
         $blockOrder = json_decode($request->input('order'));
 
