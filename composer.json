@@ -18,7 +18,7 @@
         }
     ],
     "require": {
-        "tcg/voyager": "^1.1",
+        "tcg/voyager": "dev-master",
         "pvtl/voyager-frontend": "dev-master",
         "pvtl/voyager-pages": "dev-master"
     },

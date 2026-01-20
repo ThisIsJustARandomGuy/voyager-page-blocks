@@ -2,6 +2,7 @@
 
 namespace Pvtl\VoyagerPageBlocks\Providers;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Pvtl\VoyagerPageBlocks\Commands;
 use Illuminate\Support\ServiceProvider;
 
@@ -79,9 +80,9 @@ class PageBlocksServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(self::PACKAGE_DIR . 'database/migrations');
 
         // Locate our factories for testing
-        $this->app->make('Illuminate\Database\Eloquent\Factory')->load(
+        /*$this->app->make(Factory::class)->load(
             self::PACKAGE_DIR . 'database/factories'
-        );
+        );*/
     }
 
     /**
